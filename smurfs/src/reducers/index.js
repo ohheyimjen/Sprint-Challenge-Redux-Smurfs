@@ -1,3 +1,13 @@
+import { ADD_SMURF, GET_SMURFS, FETCH_SMURF_FAILURE } from '../actions';
+
+const initialState = {
+  smurfs: [],
+  fetchingSmurfs: false,
+  addingSmurf: false,
+  error: null
+}
+
+function reducer(state = initialState, action)
 /*
   Be sure to import in all of the action types from `../actions`
 */
