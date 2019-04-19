@@ -1,43 +1,63 @@
-import { ADD_SMURF, GET_SMURFS, FETCH_SMURF_FAILURE } from '../actions';
+import { ADD_SMURF_FAILURE, 
+  ADD_SMURF_START, 
+  ADD_SMURF_SUCCESS, 
+  GET_SMURFS_FAILURE, 
+  GET_SMURFS_START, 
+  GET_SMURFS_SUCCESS} from '../actions';
 
 const initialState = {
   smurfs: [],
   fetchingSmurfs: false,
-  addingSmurf: false,
-  error: null
+  // addingSmurf: false,
+  error: null,
+  editing: false
 }
-
-function reducer(state = initialState, action) {
+const smurfsReducer = (state = initialState, action) => {
 
   switch(action.type) {
 
-    case ADD_SMURF:
+    case ADD_SMURF_START:
     return {
       ...state,
-      error: '',
-      isLoading: true
+      fetchingSmurfs: true
+    };
+    case ADD_SMURF_SUCCESS:
+    return {
+      ...state,
+      fetchingSmurfs: false,
+      smurfs: action.payload
+    };
+    case ADD_SMURF_FAILURE:
+    return {
+      ...state,
+      fetchingSmurfs: false,
+      error: action.payload
     };
 
-    case GET_SMURFS:
+    case GET_SMURFS_START:
     return {
       ...state,
-      error: '',
-      getSmurfs: action.payload
+      fetchingSmurfs: true
     };
-
-    case FETCH_SMURF_FAILURE:
+    case GET_SMURFS_SUCCESS:
     return {
       ...state,
-      error: action.payload,
-      isLoading: false
-    }
+      fetchingSmurfs: false,
+      smurfs: action.payload
+    };
+    case GET_SMURFS_FAILURE:
+    return {
+      ...state,
+      fetchingSmurfs: false,
+      error: action.payload
+    };
 
     default: 
       return state;
   }
 }
 
-export default reducer;
+export default smurfsReducer;
 /*
   Be sure to import in all of the action types from `../actions`
 */

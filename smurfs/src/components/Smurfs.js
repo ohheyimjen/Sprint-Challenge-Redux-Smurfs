@@ -1,59 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import SmurfForm from './SmurfForm';
 
-class Friends extends Component {
+class Smurfs extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        smurfSelected: {},
-        smurfId: null,
-        showUpdate: false
+        editing: false
       };
     }
 
-  
     render() {
-      return (
-        <div className="Smurf-Container">
-          <ul className="Smurf-List">
-            {this.props.smurfs.map(smurf => {
-              return [
-                <li
-                  onClick={() => this.setState({ smurfSelected: smurf })}
-                  key={smurf.id}
-                >
-                  {smurf.name}
-                </li>,
-                <button
-                  onClick={_ =>
-                    this.setState({
-                      smurfId: smurf.id,
-                      showUpdate: !this.state.showUpdate
-                    })
-                  }
-                >
-                  {' '}
-                  Update {smurf.name}
-                </button>
-              ];
-            })}
-          </ul>
-          {Object.keys(this.state.smurfSelected).length > 0 ? (
-            <SelectedFriend
-              selected={this.state.friendSelected}
-            />
-          ) : null}
+        
+          return (
+            <div className='Smurfs'>
+                <h2>{`${this.props.smurf.name} Smurf`}</h2>
+                <h3>{`${this.props.smurf.age} Smurf years old`}</h3>
+                <h3>{`${this.props.smurf.height} cm`}</h3>
+                {this.state.editing && <SmurfForm smurf={this.props.smurf} submit={this.props.editSmurf} />}
+            </div>
+          );
+        }
 
-          {this.state.showUpdate ? <UpdateFriendForm /> : null}
-        </div>
-      );
-    }
   }
   
   const mapStateToProps = state => {
     return {
-      error: state.friendsReducer.error
-    };
-  };
+      editing: state.editing
+    }
+  }
   
-  export default connect(mapStateToProps, {})(Friends);
+  export default connect(mapStateToProps)(Smurfs);
