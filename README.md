@@ -22,9 +22,19 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
-- [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
-- [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+- [X] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+ACTIONS: are what we pass in to our reducer function as an argument. They are objects that must at least have the 'type' property, to explain the interaction, but they commonly also use an optional 'payload property. Actions never have more than those 2 properties.
+REDUCERS: take in those actions, which only describes what happened, and specify how the application's stage changes in response to said actions.
+STORE: is what brings the actions and reducers together, and holds the application state.There will only be a single 'store' in a Redux application to handle this, which is why it's known as 'THE SINGLE SOURCE OF TRUTH'
+
+- [X] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+APPLICATION STATE is global and immutable, and COMPONENT STATE is local. Application state is preferable to use when we have a state that needs to be shared by multiple components. Component state is better for when a component just needs to display data and can receive that data from its parent component.
+
+- [X] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+It is the 'middleware' which allows us to write action creators that return a function, instead of an action. It's the middle-man towards action-creators, because it intercepts them when they are called, and looks at what will be returned. If an action is being returned, the middleware will pass it along to the reducer. But if it's receiving a function from the action-creator, the middleware will invoke that function and pass in the dispatch function as an argument to it.
 
 ## Project Set Up
 
