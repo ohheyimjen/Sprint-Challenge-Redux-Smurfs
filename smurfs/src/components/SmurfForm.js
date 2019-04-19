@@ -54,6 +54,13 @@ addSmurf = event => {
         );
       }
     }
+
+    const mapStateToProps = state => {
+        return {
+            error: state.error,
+            addingSmurf: state.addingSmurf
+        };
+    };
     
-    export default SmurfForm;
+    export default connect(mapStateToProps, { addSmurf })(SmurfForm);
     
