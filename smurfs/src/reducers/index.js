@@ -7,7 +7,37 @@ const initialState = {
   error: null
 }
 
-function reducer(state = initialState, action)
+function reducer(state = initialState, action) {
+
+  switch(action.type) {
+
+    case ADD_SMURF:
+    return {
+      ...state,
+      error: '',
+      isLoading: true
+    };
+
+    case GET_SMURFS:
+    return {
+      ...state,
+      error: '',
+      getSmurfs: action.payload
+    };
+
+    case FETCH_SMURF_FAILURE:
+    return {
+      ...state,
+      error: action.payload,
+      isLoading: false
+    }
+
+    default: 
+      return state;
+  }
+}
+
+export default reducer;
 /*
   Be sure to import in all of the action types from `../actions`
 */
